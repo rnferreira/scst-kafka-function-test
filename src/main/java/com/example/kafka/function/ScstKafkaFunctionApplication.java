@@ -32,7 +32,7 @@ public class ScstKafkaFunctionApplication {
       } else {
         var out = new MyEvent(p.aProperty(), p.aProperty() + "-test");
         System.out.println("Sending new event - key: " + key + ", payload: " + out);
-        return MessageBuilder.withPayload(out).copyHeadersIfAbsent(h).build();
+        return MessageBuilder.withPayload(out).setHeaderIfAbsent(KafkaHeaders.KEY, key).build();
       }
     };
   }
